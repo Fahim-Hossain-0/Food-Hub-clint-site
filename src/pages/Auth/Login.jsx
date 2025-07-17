@@ -67,7 +67,7 @@ const Login = () => {
             });
     }
     return (
-        <div className="py-22 flex items-center justify-center bg-gray-100 px-4 mt-12">
+        <div className="py-22 flex items-center justify-center bg-gray-100 px-4 mt-6">
             <form onSubmit={handleLogin} className="bg-white p-8 rounded shadow-md w-full max-w-md space-y-4 ">
                 <h2 className="text-2xl font-bold text-center">Login</h2>
 
@@ -87,9 +87,9 @@ const Login = () => {
                         required
                         placeholder="Password"
                         className="input input-bordered w-full pr-10"
-                        minLength="8"
+                        minLength="6"
                         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                        title="Must be at least 8 characters, including a number, a lowercase and an uppercase letter"
+                        title="Must be at least 6 characters, including a number, a lowercase and an uppercase letter"
                     />
 
                     <button
