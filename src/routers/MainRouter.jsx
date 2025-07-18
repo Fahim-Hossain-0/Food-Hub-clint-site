@@ -6,6 +6,7 @@ import Register from "../pages/Auth/Register";
 import Login from "../pages/Auth/Login";
 import AddFood from "../pages/Food/AddFood";
 import AvailableFoods from "../pages/Food/avaliableFood";
+import FoodDetails from "../components/FoodDetails";
 
 const router = createBrowserRouter([
     {
@@ -25,6 +26,12 @@ const router = createBrowserRouter([
             {
                 path:'/availableFoods',
                 Component:AvailableFoods
+            },
+            {
+                path:'/foodDetails/:id',
+                Component:FoodDetails,
+               
+                
             }
         ]
     },
