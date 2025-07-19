@@ -4,9 +4,9 @@ import Swal from "sweetalert2";
 import axios from "axios";
 
 const ManageFood = () => {
-  const { user } = useContext(AuthContext);
- console.log(user);
-console.log(user?.accessToken);
+  const { user,accessToken } = useContext(AuthContext);
+ console.log(accessToken);
+// console.log(user?.accessToken);
 
   const [foods, setFoods] = useState([]);
   const [editingFood, setEditingFood] = useState(null);

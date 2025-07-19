@@ -9,6 +9,7 @@ import AvailableFoods from "../pages/Food/avaliableFood";
 import FoodDetails from "../components/FoodDetails";
 import ManageFood from "../pages/Food/ManageFood";
 import RequestedMyFood from "../pages/Food/RequestedMyFood";
+import PrivateRouter from "./PrivateRouter";
 
 const router = createBrowserRouter([
     {
@@ -23,7 +24,8 @@ const router = createBrowserRouter([
             },
             {
                 path:'/addFood',
-                Component:AddFood
+                // Component:AddFood
+                element:<PrivateRouter><AddFood></AddFood></PrivateRouter>
             },
             {
                 path:'/availableFoods',
@@ -31,15 +33,18 @@ const router = createBrowserRouter([
             },
             {
                 path:'/foodDetails/:id',
-                Component:FoodDetails,  
+                // Component:FoodDetails,  
+                element:<PrivateRouter><FoodDetails></FoodDetails></PrivateRouter>
             },
             {
                 path:'/manageMyFoods',
-                Component:ManageFood
+                // Component:ManageFood
+               element:<PrivateRouter><ManageFood></ManageFood></PrivateRouter>
             },
             {
                 path:'/requestedMyFood',
-                Component:RequestedMyFood
+                // Component:RequestedMyFood
+                element:<PrivateRouter><RequestedMyFood></RequestedMyFood></PrivateRouter>
             }
         ]
     },
