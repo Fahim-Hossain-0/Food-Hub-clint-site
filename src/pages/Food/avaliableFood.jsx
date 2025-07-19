@@ -18,14 +18,14 @@ const AvailableFoods = () => {
   // console.log(user.accessToken);
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/foods?sort=${sortOrder}`,{
+      .get(`https://food-hub-server-green.vercel.app/foods?sort=${sortOrder}`,{
         headers:{
                 authorization: `Bearer ${accessToken}`,
             }
       })
       .then(res => {
         setFoods(res.data);
-        console.log(res.data);
+        // console.log(res.data);
         setLoading(false);
       })
       .catch(err => {

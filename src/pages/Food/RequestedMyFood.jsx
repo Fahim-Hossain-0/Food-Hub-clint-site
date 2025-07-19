@@ -1,22 +1,23 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
+import Loading from "../../components/Loading";
 
 const RequestedMyFood = () => {
   const { user } = useContext(AuthContext);
 //   console.log(user.accessToken);
-console.log(user);
-console.log(user?.accessToken);
+// console.log(user);
+// console.log(user?.accessToken);
 
   const [myRequestedFoods, setMyRequestedFoods] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (user?.email) {
-      axios.get(`http://localhost:5000/requested-foods?email=${user.email}`, )
+      axios.get(`https://food-hub-server-green.vercel.app/requested-foods?email=${user.email}`, )
         .then((res) => {
           setMyRequestedFoods(res.data);
-          console.log(res.data);
+        //   console.log(res.data);
           setLoading(false);
         })
         .catch((error) => {
@@ -27,11 +28,11 @@ console.log(user?.accessToken);
   }, [user?.email]);
 
   if (loading) {
-    return <div className="text-center mt-10">Loading...</div>;
+    return <Loading></Loading>
   }
 
   return (
-    <div className="p-4 max-w-6xl mx-auto">
+    <div className="p-4 max-w-6xl mx-auto h-screen ">
       <h2 className="text-2xl font-bold mb-4">My Food Requests</h2>
       <div className="overflow-x-auto">
         <table className="table w-full border">

@@ -6,7 +6,7 @@ import Loading from '../../components/Loading';
 import { Link } from 'react-router'; // ✅ fix this import
 
 const fetchFoods = async () => {
-  const res = await axios.get('http://localhost:5000/foods');
+  const res = await axios.get('https://food-hub-server-green.vercel.app/foods');
   return res.data;
 };
 
@@ -22,7 +22,7 @@ const FeaturedFoods = () => {
   return (
     <div className="container mx-auto">
       <div>
-        <h1 className="text-5xl font-bold mt-22 text-blue-900">All Available Food</h1>
+        <h1 className="text-5xl text-center lg:text-left font-bold mt-22 text-blue-900">All Available Food</h1>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
