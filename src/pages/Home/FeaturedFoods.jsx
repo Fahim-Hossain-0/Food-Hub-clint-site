@@ -9,8 +9,8 @@ const FeaturedFoods = () => {
     const [foods, setFoods] = useState([])
     const [loading, setLoading] = useState(true)
     useEffect(() => {
-        axios
-            .get('http://localhost:5000/foods')
+      axios.get('http://localhost:5000/foods?available=true')
+
             .then(res => {
                 setLoading(false)
                 setFoods(res.data)

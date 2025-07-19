@@ -1,31 +1,50 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import Loading from './Loading';
+import { AuthContext } from '../Context/AuthContext';
 
 const FoodDetails = () => {
   const { id } = useParams();
   const [foodData, setFoodData] = useState(null);
-    const [loading,setLoading]=useState(true)
+  const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     axios.get(`http://localhost:5000/foods/${id}`)
       .then(res => {
-        setLoading(false)
-        setFoodData(res.data)
+        setFoodData(res.data);
+        setLoading(false);
       })
-    .catch(err => {
-  console.error(err);
-  setLoading(false); 
-});
+      .catch(err => {
+        console.error(err);
+        setLoading(false);
+      });
   }, [id]);
 
-  if (loading) {
-    return <Loading></Loading>;
-  }
+  const handleRequestSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await axios.put(`http://localhost:5000/foods/${id}`, {
+        status: "requested"
+      });
+
+      if (res.data.modifiedCount > 0) {
+        setFoodData(prev => ({ ...prev, status: "requested" }));
+        setShowModal(false);
+        alert("Food successfully requested!");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  if (loading) return <Loading />;
 
   return (
-    <div className="max-w-3xl mx-auto p-6  shadow-md rounded-lg mt-6 bg-[#EFEFEF]">
+    <div className="max-w-3xl mx-auto p-6 shadow-md rounded-lg mt-6 bg-[#EFEFEF]">
       <img src={foodData.foodImage} alt={foodData.foodName} className="w-full h-64 object-cover rounded-md" />
       <h2 className="text-3xl font-bold mt-4">{foodData.foodName}</h2>
       <p className="mt-2"><strong>Quantity:</strong> {foodData.quantity}</p>
@@ -40,6 +59,41 @@ const FoodDetails = () => {
           <p className="text-sm text-gray-600">{foodData.donorEmail}</p>
         </div>
       </div>
+
+      {/* Request Button */}
+      {foodData.status === "available" && (
+        <button className="btn btn-primary mt-6" onClick={() => setShowModal(true)}>
+          Request
+        </button>
+      )}
+
+      {/* Modal */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+          <form
+            onSubmit={handleRequestSubmit}
+            className="bg-white p-6 rounded-lg shadow-lg w-96 space-y-4"
+          >
+            <h2 className="text-xl font-bold">Request This Food</h2>
+
+            <input className="input input-bordered w-full" value={foodData.foodName} disabled />
+            <input className="input input-bordered w-full" value={foodData.foodImage} disabled />
+            <input className="input input-bordered w-full" value={foodData._id} disabled />
+            <input className="input input-bordered w-full" value={foodData.donorEmail} disabled />
+            <input className="input input-bordered w-full" value={foodData.donorName} disabled />
+            <input className="input input-bordered w-full" value={user?.email} disabled />
+            <input className="input input-bordered w-full" value={new Date().toLocaleString()} disabled />
+            <input className="input input-bordered w-full" value={foodData.location} disabled />
+            <input className="input input-bordered w-full" value={new Date(foodData.expireDate).toLocaleDateString()} disabled />
+            <textarea className="textarea textarea-bordered w-full" placeholder="Additional Notes"></textarea>
+
+            <div className="flex justify-end gap-2">
+              <button type="submit" className="btn btn-success">Request</button>
+              <button type="button" className="btn" onClick={() => setShowModal(false)}>Cancel</button>
+            </div>
+          </form>
+        </div>
+      )}
     </div>
   );
 };
