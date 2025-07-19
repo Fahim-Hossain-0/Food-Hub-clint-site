@@ -14,6 +14,9 @@ If you are developing a production application, we recommend using TypeScript wi
 
 npm package list ={
 
-    npm i react-icons
-    npm i sweetalert2
+    react-icons
+    sweetalert2
+    framer-motion
+    axios
+    tanstack
 }
