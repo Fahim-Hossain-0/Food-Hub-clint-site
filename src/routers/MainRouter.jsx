@@ -10,6 +10,7 @@ import FoodDetails from "../components/FoodDetails";
 import ManageFood from "../pages/Food/ManageFood";
 import RequestedMyFood from "../pages/Food/RequestedMyFood";
 import PrivateRouter from "./PrivateRouter";
+import Error from "../pages/Error/Error";
 
 const router = createBrowserRouter([
     {
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
             }
         ]
     },
+    {
+        path:"*",
+        Component:Error
+    }
 
 ])
 
