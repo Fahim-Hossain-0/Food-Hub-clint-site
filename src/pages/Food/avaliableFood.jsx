@@ -1,16 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import FoodCard from '../../components/FoodCard';
 import Loading from '../../components/Loading';
+import { AuthContext } from '../../Context/AuthContext';
 
 const AvailableFoods = () => {
   const [foods, setFoods] = useState([]);
   const [sortOrder, setSortOrder] = useState('asc');
   const [loading, setLoading] = useState(true);
+  // const {user}=use(AuthContext)
+  const {user} = useContext(AuthContext)
+  console.log(user);
+console.log(user?.accessToken);
 
+  // console.log(user.accessToken);
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/foods?sort=${sortOrder}`)
+      .get(`http://localhost:5000/foods?sort=${sortOrder}`,{
+        headers:{
+                authorization: `Bearer ${user?.accessToken}`,
+            }
+      })
       .then(res => {
         setFoods(res.data);
         console.log(res.data);

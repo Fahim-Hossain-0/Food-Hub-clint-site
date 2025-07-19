@@ -5,6 +5,9 @@ import axios from "axios";
 
 const ManageFood = () => {
   const { user } = useContext(AuthContext);
+ console.log(user);
+console.log(user?.accessToken);
+
   const [foods, setFoods] = useState([]);
   const [editingFood, setEditingFood] = useState(null);
 
@@ -12,7 +15,11 @@ const ManageFood = () => {
   useEffect(() => {
     if (user?.email) {
       axios
-        .get(`http://localhost:5000/foods?email=${user.email}`)
+        .get(`http://localhost:5000/foods?email=${user.email}`,{
+            headers:{
+                authorization: `Bearer ${user?.accessToken}`,
+            },
+        })
         .then((res) => setFoods(res.data));
     }
   }, [user]);

@@ -15,7 +15,7 @@ const Navbar = () => {
         <NavLink to="/manageMyFoods
 " className="font-semibold text-base">Manage My Foods
         </NavLink>
-        <NavLink to="/myFoodRequest
+        <NavLink to="/requestedMyFood
 " className="font-semibold text-base">My Food Request
         </NavLink>
 
