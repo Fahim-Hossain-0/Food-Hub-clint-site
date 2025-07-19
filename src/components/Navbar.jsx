@@ -4,8 +4,7 @@ import { AuthContext } from '../Context/AuthContext';
 
 
 const Navbar = () => {
-    const { user, signOutUser } = use(AuthContext)
-    // console.log(user);
+    const { user, signOutUser } = use(AuthContext);
     const Links = <>
         <NavLink to="/" className="font-semibold text-base">Home</NavLink>
         <NavLink to="/availableFoods
