@@ -8,18 +8,21 @@
 
 
 
-*{
-     font-family: "Poppins", sans-serif;
+* {
+    font-family: "Poppins", sans-serif;
 }
-.banner-font{
-       font-family: "Michroma", sans-serif; 
+
+.banner-font {
+    font-family: "Michroma", sans-serif;
 }
-.active{
-    
+
+.active {
+
     border-bottom: 2px solid rgb(216, 208, 224);
 
-    
+
 }
-.container{
+
+.container {
     width: 95%;
 }
