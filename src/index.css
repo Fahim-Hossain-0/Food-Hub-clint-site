@@ -18,7 +18,8 @@
 
 .active {
 
-    border-bottom: 2px solid rgb(216, 208, 224);
+    border-bottom: 2px solid rgb(143, 148, 214);
+    font-weight: 700;
 
 
 }
